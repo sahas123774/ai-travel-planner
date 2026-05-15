@@ -109,7 +109,7 @@ app.use(
 
 // PORT
 const PORT =
-3050;
+process.env.PORT || 3050;
 
 
 // DATABASE + SERVER
