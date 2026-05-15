@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+   <title>
+      Trip Result
+   </title>
+
+   <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-white to-indigo-100 min-h-screen">
+
+   <!-- HEADER -->
+   <header class="bg-white shadow-md border-b border-blue-100">
+
+      <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+
+         <div>
+
+            <h1 class="text-4xl font-extrabold text-blue-700">
+
+               ✈️ AI Trip Plan
+
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+
+               Your personalized travel itinerary
+
+            </p>
+
+         </div>
+
+         <a
+            href="/"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg"
+         >
+            🏠 Home
+         </a>
+
+      </div>
+
+   </header>
+
+   <!-- MAIN -->
+   <main class="max-w-7xl mx-auto px-6 py-16">
+
+      <!-- HERO -->
+      <div class="bg-white rounded-3xl shadow-2xl border border-blue-100 overflow-hidden mb-14">
+
+         <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-12">
+
+            <h1 class="text-6xl font-extrabold mb-4">
+
+               🌍 <%= destination %>
+
+            </h1>
+
+            <p class="text-2xl text-blue-100">
+
+               AI Generated Smart Travel Plan
+
+            </p>
+
+         </div>
+
+      </div>
+
+      <!-- DAY CARDS -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+         <% dayPlans.forEach((day, index) => { %>
+
+            <div class="bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition duration-500">
+
+               <!-- TOP -->
+               <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white">
+
+                  <h2 class="text-4xl font-extrabold">
+
+                     📅 Day <%= index + 1 %>
+
+                  </h2>
+
+               </div>
+
+               <!-- CONTENT -->
+               <div class="p-8">
+
+                  <pre class="whitespace-pre-wrap text-gray-700 leading-relaxed text-lg font-medium"><%= day.trim() %></pre>
+
+               </div>
+
+            </div>
+
+         <% }) %>
+
+      </div>
+
+   </main>
+
+</body>
+
+</html>
