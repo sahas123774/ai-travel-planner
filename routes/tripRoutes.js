@@ -39,6 +39,12 @@ triprouter.post(
   tripController.postGenerateTrip
 );
 
+triprouter.get(
+   '/download-trip/:tripId',
+   isAuth,
+   tripController.downloadTripPdf
+);
+
 
 module.exports =
 triprouter;
