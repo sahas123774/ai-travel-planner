@@ -40,6 +40,7 @@ exports.getwelcome =
 
 // GENERATE TRIP
 // GENERATE TRIP
+// GENERATE TRIP
 exports.postGenerateTrip =
 async (req, res) => {
 
@@ -84,22 +85,39 @@ async (req, res) => {
 
     await trip.save();
 
-    // DYNAMIC IMAGE
+    // DEFAULT FALLBACK IMAGE
     let imageUrl =
-      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop';
+      `https://picsum.photos/1600/900?random=${destination}`;
 
+    // PIXABAY IMAGE
     try {
+
+      console.log(
+        'PIXABAY KEY:',
+        process.env.PIXABAY_API_KEY
+      );
 
       const response =
         await axios.get(
 
-          `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${destination}+travel&image_type=photo&category=travel`
+          `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${destination}&image_type=photo`
         );
 
-      if (response.data.hits.length > 0) {
+      console.log(
+        'PIXABAY RESPONSE:',
+        response.data
+      );
+
+      if (
+
+        response.data.hits &&
+
+        response.data.hits.length > 0
+
+      ) {
 
         imageUrl =
-          response.data.hits[0].webformatURL;
+          response.data.hits[0].previewURL;;
 
       }
 
@@ -108,7 +126,7 @@ async (req, res) => {
     catch (err) {
 
       console.log(
-        'Image fetch error:',
+        'PIXABAY ERROR:',
         err.message
       );
 
@@ -124,7 +142,9 @@ async (req, res) => {
 
     // RESULT PAGE
     res.render(
+
       'trip-result',
+
       {
 
         pagetitle:
@@ -139,6 +159,7 @@ async (req, res) => {
         imageUrl
 
       }
+
     );
 
   }
