@@ -8,6 +8,8 @@ require('pdfkit');
 const Trip =
 require('../models/trip');
 
+const axios = require('axios');
+
 
 // HOME PAGE
 exports.getHome =
@@ -37,6 +39,7 @@ exports.getwelcome =
 
 
 // GENERATE TRIP
+// GENERATE TRIP
 exports.postGenerateTrip =
 async (req, res) => {
 
@@ -62,43 +65,81 @@ async (req, res) => {
         budget
 
       );
-      const trip =
-new Trip(
 
-   req.session.user._id,
+    // SAVE TRIP
+    const trip =
+      new Trip(
 
-   destination,
+        req.session.user._id,
 
-   days,
+        destination,
 
-   budget,
+        days,
 
-   tripPlan
+        budget,
 
-);
+        tripPlan
 
-await trip.save();
+      );
+
+    await trip.save();
+
+    // DYNAMIC IMAGE
+    let imageUrl =
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop';
+
+    try {
+
+      const response =
+        await axios.get(
+
+          `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${destination}+travel&image_type=photo&category=travel`
+        );
+
+      if (response.data.hits.length > 0) {
+
+        imageUrl =
+          response.data.hits[0].webformatURL;
+
+      }
+
+    }
+
+    catch (err) {
+
+      console.log(
+        'Image fetch error:',
+        err.message
+      );
+
+    }
+
+    // SPLIT DAYS
+    const dayPlans =
+      tripPlan
+      .split(/Day \d+:/)
+      .filter(
+        plan => plan.trim() !== ''
+      );
 
     // RESULT PAGE
-    // SPLIT DAYS
-const dayPlans =
-tripPlan.split(/Day \d+:/)
-.filter(plan => plan.trim() !== '');
-
-
     res.render(
       'trip-result',
-    {
-       pagetitle:
-       'Trip Result',
+      {
 
-       destination,
+        pagetitle:
+          'Trip Result',
 
-      tripPlan,
+        destination,
 
-      dayPlans
-    }
-  );
+        tripPlan,
+
+        dayPlans,
+
+        imageUrl
+
+      }
+    );
 
   }
 
