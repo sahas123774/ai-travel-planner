@@ -45,6 +45,28 @@ triprouter.get(
    tripController.downloadTripPdf
 );
 
+triprouter.get(
+   '/chat',
+   isAuth,
+   (req, res) => {
+
+      res.render(
+         'chat',
+         {
+            pagetitle:
+            'AI Chat'
+         }
+      );
+
+   }
+);
+
+triprouter.post(
+   '/chat',
+   isAuth,
+   tripController.postChat
+);
+
 
 module.exports =
 triprouter;

@@ -38,7 +38,7 @@ Days:
 ${days}
 
 Budget:
-${budget}
+₹${budget}
 
 IMPORTANT:
 
@@ -65,6 +65,8 @@ Also include:
 - transport tips
 - local foods
 - estimated budget tips
+
+Make itinerary according to the given budget.
 
 Keep response clean and structured.
 

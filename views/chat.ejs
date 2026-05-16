@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+   <title>
+      AI Travel Chat
+   </title>
+
+   <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-white to-indigo-100 min-h-screen flex flex-col">
+
+   <!-- HEADER -->
+   <header class="bg-white shadow-md border-b border-blue-100 p-5 flex justify-between items-center">
+
+      <div>
+
+         <h1 class="text-4xl font-extrabold text-blue-700">
+
+            🤖 AI Travel Assistant
+
+         </h1>
+
+         <p class="text-gray-500 mt-1">
+
+            Ask anything about your travel
+
+         </p>
+
+      </div>
+
+      <div class="flex gap-4">
+
+         <a
+            href="/"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-bold"
+         >
+            🏠 Home
+         </a>
+
+         <a
+            href="/history"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-bold"
+         >
+            📜 History
+         </a>
+
+      </div>
+
+   </header>
+
+   <!-- CHAT AREA -->
+   <main class="flex-1 max-w-5xl w-full mx-auto p-6 flex flex-col">
+
+      <!-- MESSAGES -->
+      <div
+         id="chatBox"
+         class="flex-1 bg-white rounded-3xl shadow-xl p-6 overflow-y-auto space-y-5"
+         style="height: 70vh;"
+      >
+
+         <!-- AI WELCOME -->
+         <div class="bg-blue-100 p-5 rounded-2xl max-w-xl">
+
+            👋 Hello! Ask me anything about travel.
+
+         </div>
+
+      </div>
+
+      <!-- INPUT -->
+      <form
+         id="chatForm"
+         class="mt-6 flex gap-4"
+      >
+
+         <input
+            type="text"
+            id="message"
+            placeholder="Ask your travel question..."
+            class="flex-1 p-5 rounded-2xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-300 text-lg"
+            required
+         >
+
+         <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-5 rounded-2xl font-bold shadow-lg"
+         >
+            Send
+         </button>
+
+      </form>
+
+   </main>
+
+   <!-- SCRIPT -->
+   <script>
+
+      const form =
+      document.getElementById('chatForm');
+
+      const chatBox =
+      document.getElementById('chatBox');
+
+      form.addEventListener(
+         'submit',
+         async (e) => {
+
+            e.preventDefault();
+
+            const input =
+            document.getElementById('message');
+
+            const message =
+            input.value;
+
+            // USER MESSAGE
+            chatBox.innerHTML += `
+               <div class="bg-green-100 p-5 rounded-2xl ml-auto max-w-xl">
+                  ${message}
+               </div>
+            `;
+
+            input.value = '';
+
+            // FETCH AI RESPONSE
+            const response =
+            await fetch('/chat', {
+
+               method: 'POST',
+
+               headers: {
+                  'Content-Type':
+                  'application/json'
+               },
+
+               body: JSON.stringify({
+                  message
+               })
+
+            });
+
+            const data =
+            await response.json();
+
+            // AI MESSAGE
+            chatBox.innerHTML += `
+               <div class="bg-blue-100 p-5 rounded-2xl max-w-xl">
+                  ${data.reply}
+               </div>
+            `;
+
+            // AUTO SCROLL
+            chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+         }
+      );
+
+   </script>
+
+</body>
+
+</html>

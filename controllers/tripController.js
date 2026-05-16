@@ -275,3 +275,38 @@ async (req, res) => {
    }
 
 };
+
+// AI CHAT
+exports.postChat =
+async (req, res) => {
+
+   try {
+
+      const message =
+      req.body.message;
+
+      const reply =
+      await generateTrip(
+         message,
+         1,
+         'medium'
+      );
+
+      res.json({
+         reply
+      });
+
+   }
+
+   catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+         reply:
+         'AI Error'
+      });
+
+   }
+
+};
