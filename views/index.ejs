@@ -17,10 +17,10 @@
    <!-- HEADER -->
    <header class="bg-white/80 backdrop-blur-xl shadow-md border-b border-blue-100 sticky top-0 z-50">
 
-      <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row justify-between items-center gap-5">
+      <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row justify-between items-center gap-6">
 
          <!-- LOGO -->
-         <div>
+         <div class="text-center lg:text-left">
 
             <h1 class="text-4xl font-extrabold text-blue-700">
 
@@ -37,82 +37,81 @@
          </div>
 
          <!-- NAVIGATION -->
-         <nav>
+         <nav class="w-full lg:w-auto">
 
-            <ul class="flex items-center gap-4 flex-wrap justify-center">
+            <div class="flex flex-wrap justify-center lg:justify-end gap-3">
 
                <!-- Home -->
-               <li>
-
-                  <a
-                     href="/"
-                     class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition duration-300"
-                  >
-                     🏠 Home
-                  </a>
-
-               </li>
+               <a
+                  href="/"
+                  class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
+               >
+                  🏠 Home
+               </a>
 
                <!-- History -->
-               <li>
-
-                  <a
-                     href="/history"
-                     class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition duration-300"
-                  >
-                     📜 History
-                  </a>
-
-               </li>
+               <a
+                  href="/history"
+                  class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
+               >
+                  📜 History
+               </a>
 
                <!-- AI CHAT -->
-               <li>
-
-                  <a
-                     href="/chat"
-                     class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition duration-300"
-                  >
-                     🤖 AI Chat
-                  </a>
-
-               </li>
+               <a
+                  href="/chat"
+                  class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
+               >
+                  🤖 AI Chat
+               </a>
 
                <!-- Dashboard -->
-               <li>
+               <a
+                  href="/welcome"
+                  class="bg-cyan-600 hover:bg-cyan-700 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
+               >
+                  👋 Dashboard
+               </a>
 
-                  <a
-                     href="/welcome"
-                     class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition duration-300"
-                  >
-                     👋 Dashboard
-                  </a>
-
-               </li>
-
-               <!-- Logout -->
+               <!-- AUTH -->
                <% if (isLoggedIn) { %>
 
-                  <li>
+                  <!-- Logout -->
+                  <form
+                     action="/logout"
+                     method="POST"
+                  >
 
-                     <form
-                        action="/logout"
-                        method="POST"
+                     <button
+                        type="submit"
+                        class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
                      >
+                        🚪 Logout
+                     </button>
 
-                        <button
-                           type="submit"
-                           class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition duration-300"
-                        >
-                           🚪 Logout
-                        </button>
+                  </form>
 
-                     </form>
+               <% } else { %>
 
-                  </li>
+                  <!-- Login -->
+                  <a
+                     href="/login"
+                     class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
+                  >
+                     🔑 Login
+                  </a>
+
+                  <!-- Signup -->
+                  <a
+                     href="/signup"
+                     class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-2xl font-bold shadow-lg transition duration-300"
+                  >
+                     ✨ Signup
+                  </a>
 
                <% } %>
 
-            </ul>
+            </div>
 
          </nav>
 
@@ -160,7 +159,7 @@
 
                </p>
 
-               <!-- BUTTONS -->
+               <!-- HERO BUTTONS -->
                <div class="flex flex-col sm:flex-row gap-5">
 
                   <a
