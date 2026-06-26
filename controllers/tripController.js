@@ -8,20 +8,40 @@ require('pdfkit');
 const Trip =
 require('../models/trip');
 
+const Review=require("../models/Review");
+
 const axios = require('axios');
 
 
 // HOME PAGE
-exports.getHome =
-(req, res) => {
+exports.getHome = async (req, res) => {
 
-  res.render(
-    'index',
-    {
-      pagetitle:
-        'AI Travel Planner'
-    }
-  );
+  try {
+
+    const reviews = await Review.fetchAll();
+
+    const reviewStats = await Review.getStats();
+
+    res.render("index", {
+      pagetitle: "AI Travel Planner",
+      reviews,
+      reviewStats
+    });
+
+  } catch (err) {
+
+    console.log(err);
+
+    res.render("index", {
+      pagetitle: "AI Travel Planner",
+      reviews: [],
+      reviewStats: {
+        average: 0,
+        total: 0
+      }
+    });
+
+  }
 
 };
 
@@ -117,7 +137,8 @@ async (req, res) => {
       ) {
 
         imageUrl =
-          response.data.hits[0].previewURL;;
+          response.data.hits[0].largeImageURL ||
+          response.data.hits[0].webformatURL;
 
       }
 

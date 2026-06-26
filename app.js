@@ -21,6 +21,9 @@ require('./routes/tripRoutes');
 const authRoutes =
 require('./routes/authRoutes');
 
+const reviewRoutes=
+require("./routes/reviewRoutes");
+
 
 const app =
 express();
@@ -92,6 +95,8 @@ app.use(
 app.use(authRoutes);
 
 app.use(tripRoutes);
+
+app.use(reviewRoutes);
 
 
 // 404

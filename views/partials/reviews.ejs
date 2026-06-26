@@ -1,0 +1,97 @@
+<section class="py-20 bg-white">
+
+<div class="max-w-6xl mx-auto">
+
+<h2 class="text-5xl font-bold text-center">
+
+⭐ Traveler Reviews
+
+</h2>
+
+<p class="text-center text-gray-500 mt-3">
+
+<%= reviewStats.average %> / 5 ⭐
+
+(<%= reviewStats.total %> Reviews)
+
+</p>
+
+<% if(isLoggedIn){ %>
+
+<form
+action="/review"
+method="POST"
+class="bg-slate-100 rounded-3xl p-8 mt-12">
+
+<select
+name="rating"
+class="border p-3 rounded-xl w-full">
+
+<option value="5">★★★★★</option>
+
+<option value="4">★★★★☆</option>
+
+<option value="3">★★★☆☆</option>
+
+<option value="2">★★☆☆☆</option>
+
+<option value="1">★☆☆☆☆</option>
+
+</select>
+
+<textarea
+name="comment"
+required
+class="border mt-5 w-full p-4 rounded-xl h-32"
+placeholder="Write your review..."></textarea>
+
+<button
+class="mt-5 bg-blue-600 text-white px-8 py-3 rounded-xl">
+
+Submit Review
+
+</button>
+
+</form>
+
+<% } %>
+
+<div class="grid md:grid-cols-3 gap-8 mt-14">
+
+<% reviews.forEach(review=>{ %>
+
+<div class="bg-slate-50 rounded-3xl p-7 shadow">
+
+<h3 class="font-bold text-xl">
+
+<%= review.username %>
+
+</h3>
+
+<p class="text-yellow-500 mt-3">
+
+<%= "⭐".repeat(review.rating) %>
+
+</p>
+
+<p class="mt-4">
+
+<%= review.comment %>
+
+</p>
+
+<p class="text-gray-400 text-sm mt-5">
+
+<%= new Date(review.createdAt).toDateString() %>
+
+</p>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</div>
+
+</section>

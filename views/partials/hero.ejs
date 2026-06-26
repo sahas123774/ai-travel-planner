@@ -1,0 +1,101 @@
+<section
+class="relative h-screen w-full overflow-hidden">
+
+   <!-- Background Image -->
+
+   <img
+      src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800&auto=format&fit=crop"
+      class="absolute inset-0 w-full h-full object-cover"
+      alt="Travel"
+   >
+
+   <!-- Overlay -->
+
+   <div
+      class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20">
+   </div>
+
+   <!-- Hero Content -->
+
+   <div
+      class="relative z-10 h-full flex items-center justify-center">
+
+      <div
+         class="text-center text-white max-w-5xl px-6">
+
+         <span
+            class="inline-block bg-white/20 backdrop-blur-lg px-6 py-3 rounded-full border border-white/30 font-semibold">
+
+            🌍 AI Powered Smart Travel Planner
+
+         </span>
+
+         <h1
+            class="mt-8 text-6xl md:text-8xl font-extrabold leading-tight">
+
+            Discover Your
+
+            <br>
+
+            Next Adventure
+
+         </h1>
+
+         <p
+            class="mt-8 text-xl md:text-2xl text-gray-200 leading-9">
+
+            Generate personalized itineraries,
+
+            discover amazing destinations,
+
+            chat with AI,
+
+            and create unforgettable journeys.
+
+         </p>
+
+         <div
+            class="mt-12 flex justify-center gap-6 flex-wrap">
+
+            <a
+               href="#features"
+               class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:scale-105 transition">
+
+               🚀 Explore Features
+
+            </a>
+
+            <% if(!isLoggedIn){ %>
+
+            <a
+               href="/login"
+               class="bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:scale-105 transition">
+
+               🔑 Login
+
+            </a>
+
+            <% } %>
+
+         </div>
+
+      </div>
+
+   </div>
+
+   <!-- Scroll Down -->
+
+   <div
+      class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+
+      <a
+         href="#features"
+         class="text-white text-4xl">
+
+         ↓
+
+      </a>
+
+   </div>
+
+</section>
